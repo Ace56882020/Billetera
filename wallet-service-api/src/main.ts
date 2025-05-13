@@ -16,7 +16,7 @@ async function bootstrap() {
     .setTitle('Billetera Virtual')
     .setDescription('Documentación de la API de la billetera virtual')
     .setVersion('1.0')
-    .addTag('wallet') // opcional
+    .addTag('Billetera') // opcional
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
