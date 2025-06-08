@@ -31,6 +31,17 @@ async function handleRequest<T>(promise: Promise<any>) {
   } catch (error: any) {
     const axiosError = error as AxiosError;
 
+    // Validar si es un error de conexión
+    const connectionErrorCodes = ['ECONNREFUSED', 'ENOTFOUND', 'ETIMEDOUT', 'EAI_AGAIN'];
+    if (connectionErrorCodes.includes((axiosError as any).code)) {
+      return {
+        success: false,
+        statusCode: 503,
+        message: 'No hay conexión con el servicio externo',
+        error: (axiosError as any).code,
+      };
+    }
+
     const statusCode = axiosError.response?.status || 500;
     const message =
       (axiosError.response?.data as { message?: string })?.message || 'Error desconocido';

@@ -13,6 +13,7 @@ export class ClientService {
       );
       return res;
     } catch (error) {
+      console.log(error)
       throw error;
     }
   }
